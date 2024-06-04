@@ -1,0 +1,105 @@
+// $my-bg-color: #cfe0e8;
+// $my-text-color: #667292;
+//
+//
+// nav.navbar {
+//     background-color: $my-bg-color !important;
+//     .navbar-nav .nav-link span{
+//         color: darken($my-text-color, 15);
+//         font-weight: 600;
+//     }
+// }
+//
+// footer.o_footer {
+//     background-color: $my-bg-color !important;
+//     color: $my-text-color;
+// }
+// .background{
+//     background-color: $my-bg-color !important;
+//     }
+
+// Define color variables
+$primary-color: #005f73; // Deep blue
+$secondary-color: #94d2bd; // Light green
+$background-color: #f0f4f8; // Light background color
+$text-color: #333333; // Dark text for readability
+
+// Typography variables
+$font-family: 'Roboto', sans-serif;
+
+// Navbar styling
+nav.navbar {
+    background-color: $primary-color !important;
+    .navbar-nav .nav-link span {
+        color: $background-color;
+        font-weight: 600;
+        &:hover {
+            color: $secondary-color;
+        }
+    }
+}
+
+// Footer styling
+footer.o_footer {
+    background-color: $primary-color !important;
+    color: $background-color;
+    padding: 20px;
+    text-align: center;
+    a {
+        color: $secondary-color;
+        &:hover {
+            color: lighten($secondary-color, 15%);
+        }
+    }
+}
+
+// General background styling
+.background {
+    background-color: $background-color !important;
+    color: $text-color;
+    font-family: $font-family;
+}
+
+// Button styling
+.button-primary {
+    background-color: $primary-color;
+    color: $background-color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+        background-color: darken($primary-color, 10%);
+    }
+}
+
+// Card styling
+.card {
+    border: 1px solid lighten($primary-color, 20%);
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Heading styles
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family;
+    color: $primary-color;
+}
+
+// Links styling
+a {
+    color: $primary-color;
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+// Additional utility classes
+.margin-top-lg {
+    margin-top: 30px;
+}
+
+.padding-lg {
+    padding: 20px;
+}

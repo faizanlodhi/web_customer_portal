@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Res Partner-->
+    <template id="partners">
+        <t t-call="website.layout">
+            <div class="background">
+                <link rel="stylesheet" type="text/css" href="/customer_portal/static/src/css/custom.css"/>
+                <div class="oe_structure">
+                    <section class="bg-primary text-center py-5">
+                        <div class="container">
+                            <h1 class="text-light font-weight-bold">Our Partners</h1>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="container my-5">
+                    <t t-foreach="partners" t-as="partner">
+                        <div t-attf-class="card mt-3 #{'bg-info' if book_even else ''}">
+                            <div class="card-body" id="card_body">
+                                <div class="d-flex align-items-center">
+                                    <h3 t-field="partner.image_128"
+                                        class="d-block mr-3 text-center o_width_128"
+                                        t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_image_64_cover mr-3"}'
+                                    />
+                                    <div class="ml-3">
+                                        <h3 t-field="partner.name" class="font-weight-bold text-primary"/>
+                                    </div>
+                                </div>
+                                <a t-attf-href="/users/#{partner.id}" class="btn btn-primary btn-sm mt-3">
+                                    <i class="fa fa-partner"></i>
+                                    Partner Detail
+                                </a>
+                                <b class="mt-4">Details</b>
+                                <ul class="list-unstyled mt-2">
+                                    <li>
+                                        <b>Address:</b>
+                                        <span t-esc="partner.street"/>,<span t-esc="partner.city"/>,<span
+                                            t-esc="partner.state_id.name"/>,<span t-esc="partner.zip"/>,
+                                        <span t-esc="partner.country_id.name"/>
+                                    </li>
+                                    <li>
+                                        <b>Phone:</b>
+                                        <span t-esc="partner.phone"/>
+                                    </li>
+                                    <li>
+                                        <b>Email:</b>
+                                        <span t-esc="partner.email"/>
+                                    </li>
+                                    <li>
+                                        <b>Website Link:</b>
+                                        <span t-esc="partner.website"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <section class="bg-primary text-center py-5">
+                    <h1 class="text-light font-weight-bold">Thanks for Visiting Us.</h1>
+                </section>
+            </div>
+        </t>
+    </template>
+    <template id="log_in" name="Login">
+        <t t-call="website.layout">
+            <div class="background">
+                <div class="container text-center py-5">
+                    <h1 class="font-weight-bold text-primary">Login</h1>
+                </div>
+                <div class="container" style="max-width: 400px; margin-top: 50px;">
+                    <form action="/partner_login" method="post" class="bg-white p-4 shadow-sm rounded">
+                        <div class="form-group">
+                            <label for="username" class="font-weight-bold">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="font-weight-bold">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   required="required"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="partner_detail" name="Partner Detail">
+        <t t-call="website.layout">
+        <div class="background" t-att-style="'background-color: #' + partner.color_code;">
+                <link rel="stylesheet" type="text/css" href="/customer_portal/static/src/css/custom.css"/>
+                <div class="container py-5">
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <h3 t-field="partner.image_128"
+                                t-options="{'widget': 'image', 'class': 'mx-auto d-block img-thumbnail'}"/>
+                        </div>
+                        <div class="offset-1 col-6">
+                            <h1 class="font-weight-bold text-primary" t-field="partner.name"></h1>
+                            <h4 class="mt-4">Details</h4>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <b>Address:</b>
+                                    <span t-esc="partner.street"/>,<span t-esc="partner.city"/>,<span
+                                        t-esc="partner.state_id.name"/>,<span t-esc="partner.zip"/>,
+                                    <span t-esc="partner.country_id.name"/>
+                                </li>
+                                <li>
+                                    <b>Phone:</b>
+                                    <span t-esc="partner.phone"/>
+                                </li>
+                                <li>
+                                    <b>Email:</b>
+                                    <span t-esc="partner.email"/>
+                                </li>
+                                <li>
+                                    <b>Website Link:</b>
+                                    <a t-att-href="partner.website" t-esc="partner.website"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <t t-if="partner.child_ids">
+                        <div class="child container">
+                            <div>
+                                <h3 style="text-align: left;">Contacts and Addresses</h3>
+                                <ul class="nav nav-tabs" style="top-margin: 30px;">
+                                    <section t-foreach="partner.child_ids" t-as="child">
+                                        <ul class="col-md-4 mb-4">
+                                            <!--                                        <div class="card h-100">-->
+                                            <!--                                            <div class="card-body">-->
+                                            <div class="d-flex align-items-center">
+                                                <!---->
+                                                <h3 t-field="child.image_128"
+                                                    class="d-block mr-3 text-center o_width_128"
+                                                    t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_image_64_cover
+                                    mr-3"}'
+                                                />
+                                                <ul>
+                                                    <li class="ml-3">
+                                                        <span t-field="child.name"/>
+                                                    </li>
+                                                    <li class="ml-3">
+                                                        <span t-field="child.function"/>
+                                                    </li>
+                                                    <li class="ml-3">
+                                                        <span t-field="child.email"/>
+                                                    </li>
+                                                    <li class="ml-3">
+                                                        <span t-field="child.phone"/>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!--                                            </div>-->
+                                            <!--                                        </div>-->
+                                        </ul>
+                                    </section>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="partner.task_ids">
+                        <div class="mt-5">
+                            <h3>Projects</h3>
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Project</th>
+                                        <th>Assigned To</th>
+                                        <th>Stage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="partner.task_ids" t-as="project">
+                                        <td>
+                                            <t t-esc="project.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="project.project_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="project.user_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="project.stage_id.name"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <t t-if="partner.invoice_ids">
+                        <div class="mt-5">
+                            <h3>Invoices</h3>
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Invoice Date</th>
+                                        <th>Tax Excluded</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Payment Status</th>
+                                        <th>Print</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="partner.invoice_ids" t-as="invoice">
+                                        <td>
+                                            <t t-esc="invoice.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="invoice.invoice_date"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="invoice.amount_untaxed_signed"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="invoice.amount_total_signed"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="invoice.state"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="invoice.payment_state"/>
+                                        </td>
+                                        <td>
+                                            <a t-att-href="'/download/invoice/' + str(invoice.id)">
+                                                <button type="button" class="btn btn-primary btn-sm">Print</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <t t-if="partner.sale_order_ids">
+                        <div class="mt-5">
+                            <h3>Sales</h3>
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Order Date</th>
+                                        <th>Salesperson</th>
+                                        <th>Total</th>
+                                        <th>Invoice Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="partner.sale_order_ids" t-as="sale">
+                                        <td>
+                                            <t t-esc="sale.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="sale.date_order"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="sale.user_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="sale.amount_total"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="sale.invoice_status"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="partner.id">
+                        <div class="Message container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div>
+                                        <h3 style="text-align: left;">Send Message</h3>
+                                        <ul class="nav nav-tabs" style="top-margin: 30px;">
+                                            <form action="/submit_contact_form" method="post"
+                                                  enctype="multipart/form-data">
+                                                <!---->
+                                                <input type="hidden" name="partner_id" t-att-value="partner.id"/>
+
+                                                <div class="form-group">
+                                                    <label for="message">Message:</label>
+                                                    <textarea style="width:7in; height: 4in;" id="message" name="message"
+                                                    class="form-control"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="attachment">Attach File:</label>
+                                                    <input type="file" id="attachment" name="attachment"
+                                                           class="form-control-file"/>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <!---->
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <t t-if="partner.message_ids">
+                                    <div class="col-md-4">
+                                        <h3>Logs</h3>
+                                        <div class="card" style="max-height: 500px; overflow-y: auto;">
+                                            <div class="card-body rounded border">
+                                                <t t-foreach="partner.message_ids" t-as="message">
+                                                    <div class="card mb-3 rounded border rounded-top">
+                                                        <div class="card-header">
+                                                            <strong>
+                                                                <t t-esc="message.author_id.name"/>
+                                                            </strong>
+                                                            <span class="text-muted" style="float: right;">
+                                                                <t t-esc="message.date"/>
+                                                            </span>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">
+                                                                <t t-raw="message.body"/>
+                                                            </p>
+                                                            <t t-if="message.attachment_ids">
+                                                                <div class="attachments">
+                                                                    <t t-foreach="message.attachment_ids"
+                                                                       t-as="attachment">
+                                                                        <a t-att-href="'/custom/download/attachment/' + str(attachment.id)"
+                                                                           t-att-title="attachment.name">
+                                                                            <t t-esc="attachment.name"/>
+                                                                        </a>
+                                                                        <br/>
+                                                                    </t>
+                                                                </div>
+                                                            </t>
+
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="website_layout_inherit" name="Custom Website Layout" inherit_id="website.layout">
+        <xpath expr="//header//nav//div[@id='top_menu_container']" position="inside">
+            <t t-if="request.session.get('partner_id')">
+                <li class="nav-item"
+                    style="font-family:Source Sans Pro, Odoo Unicode Support Noto, sans-serif; font-weight:bold; text-color:#FFFFFF;">
+                    <a class="nav-link" role="menuitem" href="#">
+                        <span t-esc="request.env['res.partner'].sudo().browse(request.session.get('partner_id')).name"/>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" role="menuitem" href="/partner_logout">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </t>
+            <t t-else="">
+                <li class="nav-item"
+                    style="font-family:Source Sans Pro, Odoo Unicode Support Noto, sans-serif; font-weight:bold; text-color:#FFFFFF;">
+                    <a class="nav-link" role="menuitem" href="/partner_login">
+                        <span>Customer Login</span>
+                    </a>
+                </li>
+            </t>
+        </xpath>
+    </template>
+</odoo>

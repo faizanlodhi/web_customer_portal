@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script src="/web_client_development/static/src/js/my_field_widget.js" type="text/javascript" />
+            <link href="/web_client_development/static/src/scss/my_field_widget.scss" rel="stylesheet" type="text/scss" />
+        </xpath>
+    </template>
+
+</odoo>

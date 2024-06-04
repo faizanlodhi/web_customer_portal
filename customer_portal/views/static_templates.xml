@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link href="/customer_portal/static/src/css/web_portal.css" rel="stylesheet" type="text/css"/>
+            <link href="/customer_portal/static/src/scss/custom_portal.scss" rel="stylesheet" type="text/scss"/>
+        </xpath>
+    </template>
+</odoo>
