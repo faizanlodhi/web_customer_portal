@@ -9,4 +9,9 @@ class ResPartner(models.Model):
     
     
     username = fields.Char(string='Username', required=True, unique=True)
+
+
+
+
+    
     password = fields.Char(string='Password', required=True)
